@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_vorlage" android:title="Vorlage" android:icon="@drawable/ic_pdf" />
+    <item android:id="@+id/nav_formular1" android:title="Formular 1" android:icon="@drawable/ic_form1" />
+    <item android:id="@+id/nav_formular2" android:title="Formular 2" android:icon="@drawable/ic_form2" />
+    <item android:id="@+id/nav_termine" android:title="Termine" android:icon="@drawable/ic_calendar" />
+    <item android:id="@+id/nav_einstellungen" android:title="Einstellungen" android:icon="@drawable/ic_settings" />
+</menu>

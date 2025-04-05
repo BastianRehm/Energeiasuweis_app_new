@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_vorlage">
+
+    <fragment
+        android:id="@+id/nav_vorlage"
+        android:name="com.example.energieausweis.ui.VorlageFragment"
+        android:label="Vorlage" />
+
+    <fragment
+        android:id="@+id/nav_formular1"
+        android:name="com.example.energieausweis.ui.Formular1Fragment"
+        android:label="Formular 1" />
+
+    <fragment
+        android:id="@+id/nav_formular2"
+        android:name="com.example.energieausweis.ui.Formular2Fragment"
+        android:label="Formular 2" />
+
+    <fragment
+        android:id="@+id/nav_termine"
+        android:name="com.example.energieausweis.ui.TermineFragment"
+        android:label="Termine" />
+
+    <fragment
+        android:id="@+id/nav_einstellungen"
+        android:name="com.example.energieausweis.ui.EinstellungenFragment"
+        android:label="Einstellungen" />
+
+</navigation>
