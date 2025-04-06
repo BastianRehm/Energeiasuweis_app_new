@@ -270,7 +270,7 @@ Geschossdecke eine Dämmung (meist Glaswolle angebracht ist)"
             android:id="@+id/btnSolaranlage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bild auswählen" />
+            android:text="Bild auswählendsad" />
 
     </LinearLayout>
 </ScrollView>
