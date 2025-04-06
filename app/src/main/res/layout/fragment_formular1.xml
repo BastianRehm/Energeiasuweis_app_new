@@ -1,18 +1,276 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:paddingBottom="80dp">
 
-    <EditText
-        android:id="@+id/etAdresse"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Adresse" />
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/btnSpeichern"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Speichern" />
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hilfestellung für Makler"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Im GEG soll die Qualität der Energieausweise gesteigert werden. Viele billig\nAnbieter im Internet erstellten mit Kundendaten Energieausweise, ohne diese auf\nPlausibilität zu prüfen. Um künftig die Datenqualität zu verbessern müssen vom\nEigentümer / Makler folgende Daten bereitgestellt werden, anhand derer der\nEnergieberater die Kundendaten auf Plausibilität prüfen kann:"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="16dp" />
+
+        <!-- Abschnitt Hausfassade -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bilder der Hausfassade"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Beispiel für gute Fotos (senkrecht zur Gebäusseite stehen bei der Aufnahmen):"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="16dp" />
+
+        <LinearLayout
+            android:id="@+id/imageHausfassade"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:divider="?android:attr/dividerHorizontal"
+            android:showDividers="middle"
+            android:background="#DDDDDD"
+            android:padding="4dp" />
+
+        <Button
+            android:id="@+id/btnHausfassade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bild auswählen" />
+
+        <EditText
+            android:id="@+id/notizHausfassade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notizen zur Hausfassade"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/edit_text" />
+
+        <!--Trennlinie-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#888888"
+            android:layout_marginVertical="16dp" />
+
+        <!-- Abschnitt Heizung (Typenschild) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bilder der Heizung (Typenschild) und der Rohre im Heizraum"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Das Typenschild ist meist auf der Rückseite des Kessels angebracht"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="16dp" />
+
+        <LinearLayout
+            android:id="@+id/imageHeizung"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:divider="?android:attr/dividerHorizontal"
+            android:showDividers="middle"
+            android:background="#DDDDDD"
+            android:padding="4dp" />
+
+        <Button
+            android:id="@+id/btnHeizung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bild auswählen" />
+
+        <!--Trennlinie-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#888888"
+            android:layout_marginVertical="16dp" />
+
+        <!-- Abschnitt Heizrohre -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Beim Foto für den Heizraum darauf achten, dass die Heizrohre möglichst gut zu
+sehen sind. Eine Dämmung nach EnEV ist gegeben, wenn die Dämmung dem
+Rohrdurchmesser entspricht"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="16dp" />
+
+        <LinearLayout
+            android:id="@+id/imageHeizrohre"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:divider="?android:attr/dividerHorizontal"
+            android:showDividers="middle"
+            android:background="#DDDDDD"
+            android:padding="4dp" />
+
+        <Button
+            android:id="@+id/btnHeizrohre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bild auswählen" />
+
+        <!--Trennlinie-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#888888"
+            android:layout_marginVertical="16dp" />
+
+        <!-- Abschnitt Fenster -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bilder der Fenster"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bei vielen Fenstern ist im Fenster das Baujahr und manchmal sogar der U-Wert
+(energetische Qualität) eingedruckt."
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="16dp" />
+
+        <LinearLayout
+            android:id="@+id/imageFenster"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:divider="?android:attr/dividerHorizontal"
+            android:showDividers="middle"
+            android:background="#DDDDDD"
+            android:padding="4dp" />
+
+        <Button
+            android:id="@+id/btnFenster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bild auswählen" />
+
+        <!--Trennlinie-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#888888"
+            android:layout_marginVertical="16dp" />
+
+        <!-- Abschnitt Dämmung -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bilder der Dämmung im Dach bzw. oberste Geschoßdecke"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Meist ist es möglich über eine Einschubtreppe in den Dachraum zu gelangen.
+Hier sieht man, ob zwischen den Dachsparren und / oder auf der obersten
+Geschossdecke eine Dämmung (meist Glaswolle angebracht ist)"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="16dp" />
+
+        <LinearLayout
+            android:id="@+id/imageDaemmung"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:divider="?android:attr/dividerHorizontal"
+            android:showDividers="middle"
+            android:background="#DDDDDD"
+            android:padding="4dp" />
+
+        <Button
+            android:id="@+id/btnDaemmung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bild auswählen" />
+
+        <!--Trennlinie-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#888888"
+            android:layout_marginVertical="16dp" />
+
+        <!-- Abschnitt Solaranlage -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bild der Solaranlage / Lüftung / Klimaanlage"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bei vorhanden sein: Bilder der Lüftung, Solaranlage, Klimaanlage"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="16dp" />
+
+        <LinearLayout
+            android:id="@+id/imageSolaranlage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:divider="?android:attr/dividerHorizontal"
+            android:showDividers="middle"
+            android:background="#DDDDDD"
+            android:padding="4dp" />
+
+        <Button
+            android:id="@+id/btnSolaranlage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bild auswählen" />
+
+    </LinearLayout>
+</ScrollView>
