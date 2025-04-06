@@ -44,7 +44,7 @@
             android:paddingBottom="16dp" />
 
         <LinearLayout
-            android:id="@+id/imageHausfassade"
+            android:id="@+id/layoutHausfassadeBilder"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:orientation="horizontal"
@@ -95,7 +95,7 @@
             android:paddingBottom="16dp" />
 
         <LinearLayout
-            android:id="@+id/imageHeizung"
+            android:id="@+id/layoutHeizungBilder"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:orientation="horizontal"
@@ -111,6 +111,16 @@
             android:layout_height="wrap_content"
             android:text="Bild auswählen" />
 
+        <EditText
+            android:id="@+id/notizHeizung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notizen zur Heizung"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/edit_text" />
+
         <!--Trennlinie-->
         <View
             android:layout_width="match_parent"
@@ -122,6 +132,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Bilder der Heizrohre"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Beim Foto für den Heizraum darauf achten, dass die Heizrohre möglichst gut zu
 sehen sind. Eine Dämmung nach EnEV ist gegeben, wenn die Dämmung dem
 Rohrdurchmesser entspricht"
@@ -130,7 +148,7 @@ Rohrdurchmesser entspricht"
             android:paddingBottom="16dp" />
 
         <LinearLayout
-            android:id="@+id/imageHeizrohre"
+            android:id="@+id/layoutHeizrohreBilder"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:orientation="horizontal"
@@ -145,6 +163,16 @@ Rohrdurchmesser entspricht"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bild auswählen" />
+
+        <EditText
+            android:id="@+id/notizHeizrohre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notizen zur Heizrohre"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/edit_text" />
 
         <!--Trennlinie-->
         <View
@@ -172,7 +200,7 @@ Rohrdurchmesser entspricht"
             android:paddingBottom="16dp" />
 
         <LinearLayout
-            android:id="@+id/imageFenster"
+            android:id="@+id/layoutFensterBilder"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:orientation="horizontal"
@@ -187,6 +215,16 @@ Rohrdurchmesser entspricht"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bild auswählen" />
+
+        <EditText
+            android:id="@+id/notizFenster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notizen zur Fenster"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/edit_text" />
 
         <!--Trennlinie-->
         <View
@@ -215,7 +253,7 @@ Geschossdecke eine Dämmung (meist Glaswolle angebracht ist)"
             android:paddingBottom="16dp" />
 
         <LinearLayout
-            android:id="@+id/imageDaemmung"
+            android:id="@+id/layoutDaemmungBilder"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:orientation="horizontal"
@@ -230,6 +268,16 @@ Geschossdecke eine Dämmung (meist Glaswolle angebracht ist)"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bild auswählen" />
+
+        <EditText
+            android:id="@+id/notizDaemmung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notizen zur Daemmung"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/edit_text" />
 
         <!--Trennlinie-->
         <View
@@ -256,7 +304,7 @@ Geschossdecke eine Dämmung (meist Glaswolle angebracht ist)"
             android:paddingBottom="16dp" />
 
         <LinearLayout
-            android:id="@+id/imageSolaranlage"
+            android:id="@+id/layoutSolaranlageBilder"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:orientation="horizontal"
@@ -272,5 +320,47 @@ Geschossdecke eine Dämmung (meist Glaswolle angebracht ist)"
             android:layout_height="wrap_content"
             android:text="Bild auswählen" />
 
+        <EditText
+            android:id="@+id/notizSolaranlage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notizen zur Solaranlage"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/edit_text" />
+
+        <!--Trennlinie-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#888888"
+            android:layout_marginVertical="16dp" />
+
+    <!-- Speicher- und Zurücksetzen-Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/btnZuruecksetzen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zurücksetzen"
+            android:layout_marginEnd="16dp" />
+
+        <Button
+            android:id="@+id/btnSpeichern"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Speichern" />
+
+    </LinearLayout>
     </LinearLayout>
 </ScrollView>
+
+
