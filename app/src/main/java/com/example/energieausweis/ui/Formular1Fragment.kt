@@ -3,9 +3,11 @@ package com.example.energieausweis.ui
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Canvas
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
 import android.net.Uri
@@ -27,6 +29,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class Formular1Fragment : Fragment() {
 
@@ -152,9 +155,13 @@ class Formular1Fragment : Fragment() {
             scaleType = ImageView.ScaleType.CENTER_CROP
             setPadding(8, 8, 8, 8)
             background = ContextCompat.getDrawable(requireContext(), android.R.drawable.picture_frame)
+
+            // 👇 Original-URI für späteren PDF-Zugriff merken
+            tag = imageUri
         }
         container.addView(imageView)
     }
+
 
     private fun createPdf() {
         val document = PdfDocument()
@@ -175,14 +182,14 @@ class Formular1Fragment : Fragment() {
             y = 40
         }
 
-        fun drawSection(title: String, imageLayout: LinearLayout, notizFeld: EditText) {
+        fun drawSection(title: String, text: String, imageLayout: LinearLayout?, notizFeld: EditText?) {
             paint.textSize = 16f
             if (y > pageHeight - 100) newPage()
             canvas.drawText(title, 40f, y.toFloat(), paint)
             y += 30
 
             paint.textSize = 12f
-            val lines = notizFeld.text.toString().split("\n")
+            val lines = text.split("\n")
             for (line in lines) {
                 if (y > pageHeight - 40) newPage()
                 canvas.drawText(line, 40f, y.toFloat(), paint)
@@ -190,38 +197,169 @@ class Formular1Fragment : Fragment() {
             }
             y += 20
 
-            if (imageLayout.childCount == 0) {
-                if (y > pageHeight - 40) newPage()
-                canvas.drawText("(Kein Bild vorhanden)", 40f, y.toFloat(), paint)
-                y += 20
-            } else {
-                for (i in 0 until imageLayout.childCount) {
-                    val view = imageLayout.getChildAt(i)
-                    if (view.width > 0 && view.height > 0) {
-                        val bmp = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
-                        val viewCanvas = Canvas(bmp)
-                        view.draw(viewCanvas)
-                        val scaled = Bitmap.createScaledBitmap(bmp, 200, 200, true)
-                        canvas.drawBitmap(scaled, 40f, y.toFloat(), paint)
-                        y += 210
-                    } else {
-                        canvas.drawText("(Bild konnte nicht verarbeitet werden)", 40f, y.toFloat(), paint)
-                        y += 20
+
+
+            imageLayout?.let {
+                if (it.childCount == 0) {
+                    canvas.drawText("(Kein Bild vorhanden)", 40f, y.toFloat(), paint)
+                    y += 20
+                } else {
+                    val maxWidth = 300
+                    val maxHeight = 400
+                    val spacing = 20
+                    val marginX = 40
+                    var x = marginX
+                    var rowHeight = 0
+
+                    for (i in 0 until it.childCount) {
+                        val view = it.getChildAt(i)
+                        if (view is ImageView) {
+                            val imageUri = view.tag as? Uri
+                            if (imageUri != null) {
+                                try {
+                                    val original = getRotatedBitmap(requireContext(), imageUri)
+                                    if (original != null) {
+                                        val ratio = original.height.toFloat() / original.width
+                                        var scaledWidth = maxWidth
+                                        var scaledHeight = (scaledWidth * ratio).toInt()
+
+                                        if (scaledHeight > maxHeight) {
+                                            scaledHeight = maxHeight
+                                            scaledWidth = (scaledHeight / ratio).toInt()
+                                        }
+
+                                        // Neue Zeile, wenn rechts kein Platz mehr
+                                        if (x + scaledWidth > pageWidth - marginX) {
+                                            x = marginX
+                                            y += rowHeight + spacing
+                                            rowHeight = 0
+                                        }
+
+                                        // Neue Seite, wenn unten kein Platz mehr
+                                        if (y + scaledHeight > pageHeight - 40) {
+                                            newPage()
+                                            x = marginX
+                                            y = 40
+                                            rowHeight = 0
+                                        }
+
+                                        val scaled = Bitmap.createScaledBitmap(
+                                            original, scaledWidth, scaledHeight, true
+                                        )
+                                        canvas.drawBitmap(scaled, x.toFloat(), y.toFloat(), paint)
+
+                                        x += scaledWidth + spacing
+                                        rowHeight = maxOf(rowHeight, scaledHeight)
+                                    }
+                                } catch (e: Exception) {
+                                    canvas.drawText(
+                                        "(Fehler beim Bildladen)",
+                                        x.toFloat(),
+                                        y.toFloat(),
+                                        paint
+                                    )
+                                    y += 20
+                                }
+                            } else {
+                                canvas.drawText(
+                                    "(Kein Bild-URI vorhanden)",
+                                    x.toFloat(),
+                                    y.toFloat(),
+                                    paint
+                                )
+                                y += 20
+                            }
+                        }
                     }
+
+                    y += rowHeight + spacing
                 }
             }
 
-            y += 40
+            notizFeld?.let {
+                val notizLines = it.text.toString().split("\n")
+                for (line in notizLines) {
+                    if (y > pageHeight - 40) newPage()
+                    canvas.drawText(line, 40f, y.toFloat(), paint)
+                    y += 18
+                }
+                y += 20
+
+                // ⬇️ Neue Seite nach der Notiz
+                newPage()
+            }
         }
 
+            drawSection(
+            "Hilfestellung für Makler",
+            "Im GEG soll die Qualität der Energieausweise gesteigert werden. Viele billig\n" +
+                    "Anbieter im Internet erstellten mit Kundendaten Energieausweise, ohne diese auf\n" +
+                    "Plausibilität zu prüfen. Um künftig die Datenqualität zu verbessern, müssen vom\n" +
+                    "Eigentümer / Makler folgende Daten bereitgestellt werden, anhand derer der\n" +
+                    "Energieberater die Kundendaten auf Plausibilität prüfen kann:",
+            null, // Keine Bilder in diesem Abschnitt
+            null  // Kein Notizfeld in diesem Abschnitt
+        )
+
+        drawSection(
+            "Bilder der Hausfassade",
+            "Beispiel für gute Fotos (senkrecht zur Gebäudeseite stehen bei der Aufnahme):",
+            binding.layoutHausfassadeBilder,
+            binding.notizHausfassade
+        )
 
 
-        drawSection("Hausfassade", binding.layoutHausfassadeBilder, binding.notizHausfassade)
-        drawSection("Heizung", binding.layoutHeizungBilder, binding.notizHeizung)
-        drawSection("Heizrohre", binding.layoutHeizrohreBilder, binding.notizHeizrohre)
-        drawSection("Fenster", binding.layoutFensterBilder, binding.notizFenster)
-        drawSection("Dämmung", binding.layoutDaemmungBilder, binding.notizDaemmung)
-        drawSection("Solaranlage", binding.layoutSolaranlageBilder, binding.notizSolaranlage)
+        drawSection(
+            "Bilder der Heizung (Typenschild) und der Rohre im Heizraum",
+            "Das Typenschild ist meist auf der Rückseite des Kessels angebracht",
+            binding.layoutHeizungBilder,
+            binding.notizHeizung
+        )
+
+        drawSection(
+            "Heizung (Typenschild)",
+            "Das Typenschild ist meist auf der Rückseite des Kessels angebracht.",
+            binding.layoutHeizungBilder,
+            binding.notizHeizung
+        )
+
+        drawSection(
+            "Heizrohre",
+            "Beim Foto für den Heizraum darauf achten, dass die Heizrohre möglichst gut zu sehen sind.\n" +
+                    "Eine Dämmung nach EnEV ist gegeben, wenn die Dämmung dem Rohrdurchmesser entspricht.",
+            binding.layoutHeizrohreBilder,
+            binding.notizHeizrohre
+        )
+
+
+        drawSection(
+            "Bilder der Fenster",
+            "Bei vielen Fenstern ist im Fenster das Baujahr und manchmal sogar der U-Wert\n" +
+                    "(energetische Qualität) eingedruckt.",
+            binding.layoutFensterBilder,
+            binding.notizFenster
+        )
+
+        drawSection(
+            "Bilder der Dämmung im Dach bzw. oberste Geschoßdecke",
+            "Meist ist es möglich über eine Einschubtreppe in den Dachraum zu gelangen.\n" +
+                    "Hier sieht man, ob zwischen den Dachsparren und / oder auf der obersten\n" +
+                    "Geschossdecke eine Dämmung (meist Glaswolle angebracht ist)",
+            binding.layoutDaemmungBilder,
+            binding.notizDaemmung
+        )
+
+        drawSection(
+            "Bei vorhanden sein: Bilder der Lüftung, Solaranlage, Klimaanlage",
+            " ",
+            binding.layoutSolaranlageBilder,
+            binding.notizSolaranlage
+        )
+
+
+
+// usw. für die anderen Abschnitte...
+
 
         document.finishPage(page)
 
@@ -253,4 +391,33 @@ class Formular1Fragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun getRotatedBitmap(context: Context, imageUri: Uri): Bitmap? {
+        val inputStream = context.contentResolver.openInputStream(imageUri)
+        val exif = androidx.exifinterface.media.ExifInterface(inputStream!!)
+        val orientation = exif.getAttributeInt(
+            androidx.exifinterface.media.ExifInterface.TAG_ORIENTATION,
+            androidx.exifinterface.media.ExifInterface.ORIENTATION_NORMAL
+        )
+        inputStream.close()
+
+        val bitmapStream = context.contentResolver.openInputStream(imageUri)
+        val originalBitmap = BitmapFactory.decodeStream(bitmapStream)
+        bitmapStream?.close()
+
+        return when (orientation) {
+            androidx.exifinterface.media.ExifInterface.ORIENTATION_ROTATE_90 -> rotateBitmap(originalBitmap, 90f)
+            androidx.exifinterface.media.ExifInterface.ORIENTATION_ROTATE_180 -> rotateBitmap(originalBitmap, 180f)
+            androidx.exifinterface.media.ExifInterface.ORIENTATION_ROTATE_270 -> rotateBitmap(originalBitmap, 270f)
+            else -> originalBitmap
+        }
+    }
+
+    private fun rotateBitmap(bitmap: Bitmap?, degrees: Float): Bitmap? {
+        if (bitmap == null) return null
+        val matrix = Matrix()
+        matrix.postRotate(degrees)
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+    }
+
 }
