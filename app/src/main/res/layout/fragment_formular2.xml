@@ -1,18 +1,255 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:padding="16dp">
 
-    <EditText
-        android:id="@+id/etVerbrauch"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Energieverbrauch (kWh)" />
+        android:orientation="vertical"
+        android:divider="?android:attr/dividerHorizontal"
+        android:showDividers="middle"
+        android:dividerPadding="8dp">
 
-    <Button
-        android:id="@+id/btnSpeichern2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Speichern" />
-</LinearLayout>
+        <!-- Fensterplakette -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fensterplakette fotografiert?"
+            android:textSize="20sp"/>
+
+        <RadioGroup
+            android:id="@+id/rgFenster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/cbFensterJa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ja" />
+            <RadioButton
+                android:id="@+id/cbFensterNichtVorhanden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nicht vorhanden" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etFensterNotiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notizen" />
+
+        <!-- Dachboden -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dachboden"
+            android:textSize="20sp"/>
+
+        <RadioGroup
+            android:id="@+id/rgDach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/cbDachIsoliert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Isoliert" />
+            <RadioButton
+                android:id="@+id/cbDachNichtIsoliert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nicht isoliert" />
+            <RadioButton
+                android:id="@+id/cbDachNichtVorhanden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nicht vorhanden" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etDachNotiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notizen" />
+
+        <!-- Heizungsplakette -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Heizungsplakette fotografiert?"
+            android:textSize="20sp"/>
+
+        <RadioGroup
+            android:id="@+id/rgHeizungsPlakette"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/cbHeizungsPlaketteJa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ja" />
+            <RadioButton
+                android:id="@+id/cbHeizungsPlaketteNein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nein" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etHeizungsPlaketteNotiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notizen" />
+
+        <!-- Heizungsrohre -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Heizungsrohre isoliert?"
+            android:textSize="20sp"/>
+
+        <RadioGroup
+            android:id="@+id/rgHeizungsrohre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/cbHeizungsrohreJa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ja" />
+            <RadioButton
+                android:id="@+id/cbHeizungsrohreNein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nein" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etHeizungsrohreNotiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notizen" />
+
+        <!-- Kellerdecke gedämmt -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kellerdecke gedämmt?"
+            android:textSize="20sp"/>
+
+        <RadioGroup
+            android:id="@+id/rgKellerdecke"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/cbKellerdeckeJa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ja" />
+            <RadioButton
+                android:id="@+id/cbKellerdeckeNein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nein" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etKellerdeckeNotiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notizen" />
+
+        <!-- Solaranlage -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Solaranlage vorhanden?"
+            android:textSize="20sp"/>
+
+        <RadioGroup
+            android:id="@+id/rgSolaranlage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/cbSolaranlageJa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ja" />
+            <RadioButton
+                android:id="@+id/cbSolaranlageNein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nein" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etSolaranlageNotiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notizen" />
+
+        <!-- Außenfassade gedämmt -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Außenfassade gedämmt?"
+            android:textSize="20sp"/>
+
+        <RadioGroup
+            android:id="@+id/rgAussenfassade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/cbAussenfassadeJa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ja" />
+            <RadioButton
+                android:id="@+id/cbAussenfassadeNein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nein" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etAussenfassadeNotiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notizen" />
+
+        <!-- Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="96dp"> <!-- Platz für BottomNavigationView -->
+
+            <Button
+                android:id="@+id/btnZuruecksetzen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zurücksetzen"
+                android:layout_marginEnd="16dp" />
+
+            <Button
+                android:id="@+id/btnSpeichern"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Speichern" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>
